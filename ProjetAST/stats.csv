@@ -1,0 +1,14 @@
+Question;Résultat
+1. Nombre de classes;3
+2. Nombre de lignes de code;31
+3. Nombre total de méthodes;9
+4. Nombre total de packages;3
+5. Moyenne de méthodes par classe;3.0
+6. Moyenne d'attributs par classe;1.3333333333333333
+7. Moyenne de lignes de code par méthode;3.4444444444444446
+8. Top 10% classes par méthodes;[Car (M=4, A=2)]
+9. Top 10% classes par attributs;[Car (M=4, A=2)]
+10. Classes dans les deux catégories;[Car]
+11. Classes avec plus de X méthodes (X=2);[Car, ElectricCar]
+12. Top 10% méthodes par lignes;[Garage.showCars (5 lignes)]
+13. Max paramètres d'une méthode;3

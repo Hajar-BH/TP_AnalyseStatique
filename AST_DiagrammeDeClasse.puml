@@ -1,0 +1,94 @@
+@startuml
+skinparam shadowing false
+skinparam packageStyle rectangle
+title Diagramme UML simplifie de l'outil d'analyse statique
+
+package "analyzer" {
+  class ASTAnalyzerMain {
+    + main()
+    + lancerAnalyse()
+  }
+
+  package "parser" {
+    class Parser {
+      + construireAST()
+      + analyserFichier()
+    }
+  }
+
+  package "processor" {
+    class ApplicationStatistics {
+      - nombreClasses : int
+      - nombreMethodes : int
+      - nombreLignesApplication : int
+      + ajouterClasse()
+      + ajouterMethode()
+      + ajouterPackage()
+      + moyenneMethodesParClasse()
+      + moyenneLignesParMethode()
+      + top10PourcentClassesParMethodes()
+    }
+  }
+
+  package "visitors" {
+    class FieldDeclarationVisitor
+    class MethodDeclarationVisitor
+    class MethodInvocationVisitor
+    class TypeDeclarationVisitor
+  }
+
+  package "ui" {
+    class MainWindow {
+      + MainWindow()
+    }
+    class StatisticsWindow {
+      + afficherStatistiques()
+      + exporterCSV()
+    }
+  }
+
+  package "graph" {
+    class CallGraph {
+      - graphe : Map\<String, Set\<String\>\>
+      + ajouterAppel()
+      + getTousAppels()
+    }
+    class CallGraphWindow {
+      + CallGraphWindow(graphe : CallGraph)
+    }
+  }
+
+  ' Relations
+  ASTAnalyzerMain --> Parser : construit l'AST
+  ASTAnalyzerMain --> ApplicationStatistics : lance l'analyse
+  ASTAnalyzerMain --> MainWindow : ouvre l'interface graphique
+
+  ApplicationStatistics --> FieldDeclarationVisitor : collecte
+  ApplicationStatistics --> MethodDeclarationVisitor
+  ApplicationStatistics --> MethodInvocationVisitor
+  ApplicationStatistics --> TypeDeclarationVisitor : alimente
+
+  MainWindow --> StatisticsWindow : contient
+  MainWindow --> CallGraphWindow : contient
+  CallGraphWindow --> CallGraph : visualise
+}
+
+package "ProjetMetier" {
+  class Driver
+  class ElectricCar
+  class Truck
+  class Garage
+  class Car
+
+  Driver --> Car
+  ElectricCar --> Car
+  Truck --> Car
+  Garage --> Car
+} 
+
+note right of "ProjetMetier"
+Projet exemple utilise pour l'analyse.
+Il peut  être remplace par tout autre projet Java choisi par l'utilisateur.
+end note
+
+@enduml

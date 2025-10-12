@@ -1,26 +1,14 @@
 # README - Manuel d'installation et d'utilisation de l'outil d'analyse statique (AST / JDT) 
 
 ## Plan 
-- Présentation du projet
 - Prérequis
 - Installation
 - Organisation du projet
 - Utilisation
 - Personnalisation
 - Liens
-
-## 1. Présentation du projet
-
-Ce projet a été développé dans le cadre du module HAI913I - Évolution et  Restructuration des Logiciels.
-Il a pour objectif de mettre en œuvre une analyse statique du code source Java à l’aide de l’API Eclipse JDT (Java Development Tools).
-
-L'outil permet de : 
-- Construire et parcourir un AST (Abstract Syntax Tree) pour extraire les classes, méthodes, attributs et appels.
-- Calculer automatiquement 13 indicateurs statistiques sur le code analysé.
-- Afficher les résultats dans une interface graphique interactive avec possibilité d’exportation en CSV.
-- Générer un graphe d’appel illustrant les dépendances entre les méthodes via JGraphX.
-
-## 2. Prérequis
+- 
+## 1. Prérequis
 
 -   **Java JDK 17 ou supérieur** (testé avec Eclipse Adoptium JDK 17).
 -   **Eclipse IDE** (ou IntelliJ IDEA compatible)
@@ -28,25 +16,27 @@ L'outil permet de :
     manuellement les librairies suivantes :
     -   `commons-io.jar` (Apache Commons IO)
     -   `jgraphx-4.2.2.jar` (JGraphX)
+    -   `org.eclipse.jdt.core-3.32.0.jar` (API JDT pour l’analyse du code Java)
+    Si Maven n’est pas utilisé, ces librairies doivent être placées dans le dossier lib/ du projet et ajoutées manuellement au Build Path.
 -   **Dépendances** Les dépendances nécessaires sont automatiquement gérées via le fichier pom.xml.
-Elles peuvent également être ajoutées manuellement si le projet n’est pas importé comme projet Maven.
 
-## 3. Installation
+## 2. Installation
 
-1.  Importer le projet **ProjetAST** dans **Eclipse**.
-2.  Créer un dossier `lib/` et y placer les fichiers :
-    -   `commons-io.jar`
-    -   `jgraphx-4.2.2.jar`
-3.  Ajouter ces librairies au **Build Path** (clic droit → Build Path →
-    Add to Build Path).
-4.  Vérifier et adapter le chemin du projet dans la classe
-    `ASTAnalyzerMain` :
-    private static final String defaultProjectPath = "chemin/vers/ProjetMetier/src";
-5.  Lancer la classe **ASTAnalyzerMain.java**.
+1.  Décompresser le fichier TP1_AnalyseStatique.zip
+2.  Dans Eclipse, allez dans :
+        File → Import → Existing Maven Project.
+3.  Cliquez sur Browse, puis sélectionnez le dossier TP1_AnalyseStatique qui contient :
+        TP1AST/
+        ProjetMetier/
+4.  Eclipse importera automatiquement les dépendances via Maven.
+5.  Ouvrez ensuite le dossier TP1AST 
+6.  Entrez dans src, puis dans le package analyser: 
+        TP1AST/src/analyzer/ASTAnalyzerMain.java
+7.  Executez le Main ASTAnalyzerMain via Run As → Java Application.
 
-## 4. Organisation du projet
+## 3. Organisation du projet
 
-### 4.1 - ProjetMetier
+### 3.1 - ProjetMetier
 
 Projet d'exemple servant à tester l’analyse (modifiable par
 l'utilisateur).
@@ -59,7 +49,7 @@ Il contient plusieurs classes simples pour tester l'outil :
 - **Driver.java**, **Truck.java** → Illustrent l'héritage et les
 relations d'appel.
 
-### 4.2 - ProjetAST
+### 3.2 - ProjetAST
 
 Projet principal de l’analyseur :
 - `analyzer/ASTAnalyzerMain.java` → Point d'entrée du programme.
@@ -74,7 +64,7 @@ et affichage du graphe d'appel.
 - `analyzer/visitors/` → Visiteurs de l'AST (Type, Méthodes, Attributs,
 Appels).
 
-## 5. Utilisation
+## 4. Utilisation
 
 Au lancement, le programme affiche :
 
@@ -91,7 +81,7 @@ Au lancement, le programme affiche :
     -   Onglet **Graphe d'appel** → représentation visuelle circulaire
         des appels entre méthodes.
 
-## 6. Personnalisation
+## 5. Personnalisation
 
 -   Pour **changer la valeur de X** (question 11 : classes avec plus de
     X méthodes), modifier :
@@ -105,7 +95,7 @@ Au lancement, le programme affiche :
     mxCircleLayout layout = new mxCircleLayout(graph);
     layout.setRadius(250);
     
-## 7. Liens 
+## 6. Liens 
 
 **Code source complet sur GitHub** :  
   https://github.com/Hajar-BH/TP_AnalyseStatique

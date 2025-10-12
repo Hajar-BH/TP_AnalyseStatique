@@ -7,7 +7,7 @@
 - Utilisation
 - Personnalisation
 - Liens
-- 
+  
 ## 1. Prérequis
 
 -   **Java JDK 17 ou supérieur** (testé avec Eclipse Adoptium JDK 17).
